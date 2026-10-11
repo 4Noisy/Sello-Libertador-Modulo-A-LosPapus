@@ -1,0 +1,406 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "firmantes_",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "umbral_",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "ConfiguracionInvalida",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tiene",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "necesita",
+						"type": "uint256"
+					}
+				],
+				"name": "ConfirmacionesInsuficientes",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "LlamadaFallida",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "firmante",
+						"type": "address"
+					}
+				],
+				"name": "NoConfirmada",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "cuenta",
+						"type": "address"
+					}
+				],
+				"name": "NoEsFirmante",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "PropuestaInexistente",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "firmante",
+						"type": "address"
+					}
+				],
+				"name": "YaConfirmada",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "YaEjecutada",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "firmante",
+						"type": "address"
+					}
+				],
+				"name": "Confirmacion",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "firmante",
+						"type": "address"
+					}
+				],
+				"name": "ConfirmacionRevocada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "Ejecucion",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "proponente",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "destino",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "datos",
+						"type": "bytes"
+					}
+				],
+				"name": "Propuesta",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "confirmar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "ejecutar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "cuenta",
+						"type": "address"
+					}
+				],
+				"name": "esFirmante",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "firmantes",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "numeroConfirmaciones",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "destino",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes",
+						"name": "datos",
+						"type": "bytes"
+					}
+				],
+				"name": "proponer",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "revocarConfirmacion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "umbral",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Completar todos los bloques marcados con TODO. No usar bibliotecas externas.         Requisitos mínimos:         - Constructor: lista de firmantes sin duplicados ni address(0), 1 <= umbral <= n.         - Un firmante no puede confirmar dos veces la misma propuesta.         - Una propuesta solo se ejecuta una vez y solo con confirmaciones >= umbral.         - Si la llamada al destino falla, ejecutar() revierte.",
+			"kind": "dev",
+			"methods": {
+				"proponer(address,bytes)": {
+					"returns": {
+						"id": "Identificador de la propuesta (empieza en 0)."
+					}
+				}
+			},
+			"title": "MultifirmaUBO — PLANTILLA del Módulo A (Curso A)",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"confirmar(uint256)": {
+					"notice": "Confirma una propuesta. Solo firmantes; una vez por firmante."
+				},
+				"ejecutar(uint256)": {
+					"notice": "Ejecuta la propuesta si tiene al menos `umbral()` confirmaciones.         Solo firmantes; una única vez. Revierte si la llamada falla."
+				},
+				"firmantes()": {
+					"notice": "Lista de firmantes (útil para las pruebas)."
+				},
+				"proponer(address,bytes)": {
+					"notice": "Propone una llamada a `destino` con `datos` (calldata codificado).         Solo firmantes. La propuesta NO cuenta como confirmación automática."
+				},
+				"revocarConfirmacion(uint256)": {
+					"notice": "Retira la propia confirmación antes de que se ejecute."
+				}
+			},
+			"notice": "Multifirma m de n de las autoridades de la UBO.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/moduloA/MultifirmaUBO.sol": "MultifirmaUBO"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IMultifirmaUBO.sol": {
+			"keccak256": "0x148563732521e5fd700e8aff0a115173827b02b13897e33304b27eb2182c26e2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3307d1eee236a47613e0d261229617787d993cc092b6f8dc19ab195b97e7039f",
+				"dweb:/ipfs/QmephQnrgqjx66PWpcRyici6w1fArDwzuByCVuiy814Wqx"
+			]
+		},
+		"contracts/moduloA/MultifirmaUBO.sol": {
+			"keccak256": "0x108c7d57bf9422893f9da047173983d7b83643dd4c6ae291657f473a14a8f148",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9e2c6726fa3161e2285f91658061fff8865de5d0c58a65ce6e720cd706f68a5b",
+				"dweb:/ipfs/QmfYQVCEj8CZi1YkThL3wwJnFy2B6CfW1e8ALTfgUPnLnP"
+			]
+		}
+	},
+	"version": 1
+}

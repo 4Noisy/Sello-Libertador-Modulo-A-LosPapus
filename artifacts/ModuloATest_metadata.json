@@ -1,0 +1,171 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "autorizacionConDosFirmas",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "beforeEach",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "consultaHistoricaEstabaAutorizado",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "dobleConfirmacionRevierte",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ejecucionRepetidaRevierte",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "noFirmanteNoPuedeProponer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "registroSoloAceptaMultifirma",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "revocacionYReautorizacion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "umbralNoAlcanzadoRevierte",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"beforeEach()": {
+					"details": "Remix ejecuta beforeEach() antes de CADA prueba: estado limpio."
+				}
+			},
+			"title": "Pruebas del Módulo A — PLANTILLA (Curso A)",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"notice": "Ejecutar desde el complemento «Solidity Unit Testing» de Remix.         Mínimo 8 pruebas. Dos están resueltas como ejemplo; completar el resto.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"tests/ModuloA_test.sol": "ModuloATest"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/comun/ActorPruebas.sol": {
+			"keccak256": "0xd9f1ead53cdd7d9407eaaf5a98c102a6ef2268b02a290c1cadb300dce9708500",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7ee66a667cca496651ab30d018afa7c71769b1fb1f85e163c9c8bb2c2e45da30",
+				"dweb:/ipfs/QmXK69sCDrshKrerFzSm8BscMHJzEh6TmPrhjz2H49ESe8"
+			]
+		},
+		"contracts/comun/ConstantesUBO.sol": {
+			"keccak256": "0x98b5eb980888c977c2c6d2a61d525b30c1af56131c5eebeddd41c187958c72c3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ad5d2fc052ee90f5fb91d46c3a1d6d4a843607d9fa4885d45d50d7b2d8bb6097",
+				"dweb:/ipfs/QmZj51fAobyFyX8iSXRhYoGDuuSrHRTxqjjiKLker1NJdW"
+			]
+		},
+		"contracts/interfaces/IMultifirmaUBO.sol": {
+			"keccak256": "0x148563732521e5fd700e8aff0a115173827b02b13897e33304b27eb2182c26e2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3307d1eee236a47613e0d261229617787d993cc092b6f8dc19ab195b97e7039f",
+				"dweb:/ipfs/QmephQnrgqjx66PWpcRyici6w1fArDwzuByCVuiy814Wqx"
+			]
+		},
+		"contracts/interfaces/IRegistroEmisores.sol": {
+			"keccak256": "0x17f85012290d033c4268948ddea5c00f938a7847bd7bd41cb2f5353e76ffa740",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9d224db6f617f24b6df0d57dc3cef8ceb366e2c8d9678d91635e96e7e2b9ed53",
+				"dweb:/ipfs/QmaGGReJ43ffpZbgkXWt7VuCeAatCmBgk86hpmdBsjMuqS"
+			]
+		},
+		"contracts/moduloA/MultifirmaUBO.sol": {
+			"keccak256": "0xf0a648f72184c3254abcf434a7b979e71e3b6585a0f6a1ca45733625111a378d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2eab71fb5e1191185ef645ddb2276a206670932da15a897d532e13fb2a0eaf9c",
+				"dweb:/ipfs/QmSzVHjpbXCGvPFRvuGsERgkCDGJNMJwWcUb9pFNTAiaAt"
+			]
+		},
+		"contracts/moduloA/RegistroEmisores.sol": {
+			"keccak256": "0xba12efce4b188d9be9f2ef5282a1eeab24d792f8f5eb7c3c91bfb7e849be59f9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a78ddcec8b8a9f4474aea0b4c920a6646ba4b78f0b5bff598786582c8d5231a4",
+				"dweb:/ipfs/Qmbt6xJdtf7Q1A6FiwiRzu3UwRHJGsTSkd6FKvgcvEvQoY"
+			]
+		},
+		"remix_tests.sol": {
+			"keccak256": "0xe2783cdc204cba8c72494119339f1d90f9022b15d6c718c668b7f097d8e29787",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://bb6a22e64c7f16bcaab63b1c1a1b269d5be8a6d37bdd9dec1718477ab916b18e",
+				"dweb:/ipfs/QmdkW1tT5iadBvaHMCoskhDGZKnfdg8o1D9CcoQYtdJet7"
+			]
+		},
+		"tests/ModuloA_test.sol": {
+			"keccak256": "0xfaab4c65ce5b88d95ec76da1d5dcd59250092965f69fc31419ac2d751ed4a10c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d412ea68a6d9124948506e3f53e67f1619a78ece871e8a9ed920d8b388601233",
+				"dweb:/ipfs/QmZT8JjJS5VKzPRqXLWzSp6Vo5iASHjTfPy4ibocjcMq2S"
+			]
+		}
+	},
+	"version": 1
+}

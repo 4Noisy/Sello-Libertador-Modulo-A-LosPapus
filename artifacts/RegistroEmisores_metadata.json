@@ -1,0 +1,365 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "administracion_",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "DireccionInvalida",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "FacultadInvalida",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "NoAutorizado",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "cuenta",
+						"type": "address"
+					}
+				],
+				"name": "NoEsAdministracion",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "YaAutorizado",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "desde",
+						"type": "uint256"
+					}
+				],
+				"name": "EmisorAutorizado",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "hasta",
+						"type": "uint256"
+					}
+				],
+				"name": "EmisorRevocado",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "administracion",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "autorizarEmisor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "estaAutorizado",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "momento",
+						"type": "uint256"
+					}
+				],
+				"name": "estabaAutorizado",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "periodos",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint64",
+								"name": "desde",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "hasta",
+								"type": "uint64"
+							}
+						],
+						"internalType": "struct RegistroEmisores.Periodo[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "emisor",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "facultad",
+						"type": "bytes32"
+					}
+				],
+				"name": "revocarEmisor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Completar los TODO. Requisitos mínimos:         - Solo `administracion` (la dirección de MultifirmaUBO) autoriza y revoca.         - Solo facultades válidas (ConstantesUBO.esFacultadValida).         - Historial de TODOS los periodos: un emisor puede ser autorizado,           revocado y vuelto a autorizar; estabaAutorizado() debe acertar           para cualquier momento pasado.         - Periodos semiabiertos [desde, hasta); hasta = 0 significa abierto.",
+			"kind": "dev",
+			"methods": {
+				"autorizarEmisor(address,bytes32)": {
+					"details": "Debe revertir si el emisor ya está autorizado en esa facultad."
+				},
+				"estabaAutorizado(address,bytes32,uint256)": {
+					"details": "Un periodo de autorización es el intervalo [desde, hasta):      incluye `desde` y excluye `hasta`. Un periodo abierto tiene hasta = 0."
+				},
+				"revocarEmisor(address,bytes32)": {
+					"details": "Debe revertir si el emisor no está autorizado en esa facultad."
+				}
+			},
+			"stateVariables": {
+				"_periodos": {
+					"details": "Historial de periodos por emisor y facultad, en orden cronológico."
+				}
+			},
+			"title": "RegistroEmisores — PLANTILLA del Módulo A (Curso A)",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"EmisorAutorizado(address,bytes32,uint256)": {
+					"notice": "Se emite cuando la administración autoriza a un emisor en una facultad."
+				},
+				"EmisorRevocado(address,bytes32,uint256)": {
+					"notice": "Se emite cuando la administración retira la autorización."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"administracion()": {
+					"notice": "Dirección de la multifirma de la UBO."
+				},
+				"autorizarEmisor(address,bytes32)": {
+					"notice": "Autoriza a `emisor` en `facultad`. Solo la administración (multifirma)."
+				},
+				"estaAutorizado(address,bytes32)": {
+					"notice": "¿Está autorizado AHORA `emisor` en `facultad`?"
+				},
+				"estabaAutorizado(address,bytes32,uint256)": {
+					"notice": "¿Estaba autorizado `emisor` en `facultad` en el instante `momento`         (marca de tiempo Unix, en segundos)?"
+				},
+				"periodos(address,bytes32)": {
+					"notice": "Historial completo (útil para pruebas y auditoría)."
+				},
+				"revocarEmisor(address,bytes32)": {
+					"notice": "Retira la autorización de `emisor` en `facultad`. Solo la administración."
+				}
+			},
+			"notice": "Emisores autorizados por facultad, con historial completo.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/moduloA/RegistroEmisores.sol": "RegistroEmisores"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/comun/ConstantesUBO.sol": {
+			"keccak256": "0x98b5eb980888c977c2c6d2a61d525b30c1af56131c5eebeddd41c187958c72c3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ad5d2fc052ee90f5fb91d46c3a1d6d4a843607d9fa4885d45d50d7b2d8bb6097",
+				"dweb:/ipfs/QmZj51fAobyFyX8iSXRhYoGDuuSrHRTxqjjiKLker1NJdW"
+			]
+		},
+		"contracts/interfaces/IRegistroEmisores.sol": {
+			"keccak256": "0x17f85012290d033c4268948ddea5c00f938a7847bd7bd41cb2f5353e76ffa740",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9d224db6f617f24b6df0d57dc3cef8ceb366e2c8d9678d91635e96e7e2b9ed53",
+				"dweb:/ipfs/QmaGGReJ43ffpZbgkXWt7VuCeAatCmBgk86hpmdBsjMuqS"
+			]
+		},
+		"contracts/moduloA/RegistroEmisores.sol": {
+			"keccak256": "0xba12efce4b188d9be9f2ef5282a1eeab24d792f8f5eb7c3c91bfb7e849be59f9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a78ddcec8b8a9f4474aea0b4c920a6646ba4b78f0b5bff598786582c8d5231a4",
+				"dweb:/ipfs/Qmbt6xJdtf7Q1A6FiwiRzu3UwRHJGsTSkd6FKvgcvEvQoY"
+			]
+		}
+	},
+	"version": 1
+}
