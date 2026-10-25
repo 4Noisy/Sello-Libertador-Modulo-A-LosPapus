@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.34+commit.80d5c536"
 	},
 	"language": "Solidity",
 	"output": {
@@ -324,7 +324,7 @@
 		"compilationTarget": {
 			"contracts/moduloA/RegistroEmisores.sol": "RegistroEmisores"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "osaka",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -353,11 +353,11 @@
 			]
 		},
 		"contracts/moduloA/RegistroEmisores.sol": {
-			"keccak256": "0xba12efce4b188d9be9f2ef5282a1eeab24d792f8f5eb7c3c91bfb7e849be59f9",
+			"keccak256": "0xb2698ebfbc3a2c3a828f0bb55863829264c522170b0e17199036546f2a7e121e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a78ddcec8b8a9f4474aea0b4c920a6646ba4b78f0b5bff598786582c8d5231a4",
-				"dweb:/ipfs/Qmbt6xJdtf7Q1A6FiwiRzu3UwRHJGsTSkd6FKvgcvEvQoY"
+				"bzz-raw://1718ff119a1f654bfb3c6f56356bb5cf3ec38a41646e60dcde59b3637d0a7889",
+				"dweb:/ipfs/Qmck1KadiTD66g95dtG3VayWdDbWZk3EGt2NrPDoR7FfcD"
 			]
 		}
 	},

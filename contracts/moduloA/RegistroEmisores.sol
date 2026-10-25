@@ -53,15 +53,21 @@ contract RegistroEmisores is IRegistroEmisores {
         }
 
         // Añadir Periodo(desde = block.timestamp, hasta = 0)
-        ps.push(Periodo(uint64(block.timestamp), 0));
-        // TODO: emitir el evento EmisorAutorizado (según la interfaz)
+        uint64 ahora = uint64(block.timestamp);
+        ps.push(Periodo(ahora, 0));
+        emit EmisorAutorizado(emisor, facultad, ahora);
     }
 
     function revocarEmisor(address emisor, bytes32 facultad) external override soloAdministracion {
-        // TODO: revertir con NoAutorizado si no hay periodo abierto
-        // TODO: cerrar el último periodo (hasta = block.timestamp) y emitir EmisorRevocado
-        emisor; facultad;
-        revert("TODO: revocarEmisor");
+        // Revertir con NoAutorizado si no hay periodo abierto
+        Periodo[] storage ps = _periodos[emisor][facultad];
+        if (ps.length == 0 || ps[ps.length - 1].hasta != 0) {
+            revert NoAutorizado(emisor, facultad);
+        }
+        // Cerrar el último periodo (hasta = block.timestamp)
+        uint64 ahora = uint64(block.timestamp);
+        ps[ps.length - 1].hasta = ahora;
+        emit EmisorRevocado(emisor, facultad, ahora);
     }
 
     function estaAutorizado(address emisor, bytes32 facultad) public view override returns (bool) {
@@ -76,10 +82,26 @@ contract RegistroEmisores is IRegistroEmisores {
         override
         returns (bool)
     {
-        // TODO: ¿hay algún periodo con desde <= momento y (hasta == 0 o momento < hasta)?
-        // RETO DE EFICIENCIA: con muchos periodos, una búsqueda binaria es más barata.
-        emisor; facultad; momento;
-        revert("TODO: estabaAutorizado");
+        Periodo[] storage ps = _periodos[emisor][facultad];
+
+        // Búsqueda binaria: primer periodo con desde > momento
+        uint256 lo = 0;
+        uint256 hi = ps.length;
+        while (lo < hi) {
+            uint256 mid = (lo + hi) / 2;
+            if (ps[mid].desde <= momento) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+
+        // Ningún periodo había empezado todavía
+        if (lo == 0) return false;
+
+        // El candidato es el último periodo con desde <= momento
+        Periodo storage p = ps[lo - 1];
+        return p.hasta == 0 || momento < p.hasta;
     }
 
     /// @notice Historial completo (útil para pruebas y auditoría).

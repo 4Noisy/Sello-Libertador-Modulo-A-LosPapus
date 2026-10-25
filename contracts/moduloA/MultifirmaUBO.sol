@@ -23,6 +23,7 @@ contract MultifirmaUBO is IMultifirmaUBO {
     error YaEjecutada(uint256 id);
     error ConfirmacionesInsuficientes(uint256 id, uint256 tiene, uint256 necesita);
     error LlamadaFallida(uint256 id);
+    error DestinoSinCodigo(address destino);
 
     struct Propuesta_ {
         address destino;
@@ -69,7 +70,7 @@ contract MultifirmaUBO is IMultifirmaUBO {
         // Guardar la propuesta
         id = _propuestas.length; // el id es el largo ANTES de añadir
         _propuestas.push(Propuesta_(destino, datos, 0, false));
-        // TODO: emitir el evento Propuesta (según la interfaz)
+        emit Propuesta(id, msg.sender, destino, datos);
     }
 
     function confirmar(uint256 id) external override soloFirmante existe(id) {
@@ -80,12 +81,17 @@ contract MultifirmaUBO is IMultifirmaUBO {
         // Registrar la confirmación
         _haConfirmado[id][msg.sender] = true;
         p.confirmaciones += 1;
-        // TODO: emitir el evento Confirmacion (según la interfaz)
+        emit Confirmacion(id, msg.sender);
     }
 
     function revocarConfirmacion(uint256 id) external override soloFirmante existe(id) {
-        // TODO
-        revert("TODO: revocarConfirmacion");
+        Propuesta_ storage p = _propuestas[id];
+        // Solo se puede retirar antes de ejecutar y si el firmante había confirmado
+        if (p.ejecutada) revert YaEjecutada(id);
+        if (!_haConfirmado[id][msg.sender]) revert NoConfirmada(id, msg.sender);
+        _haConfirmado[id][msg.sender] = false;
+        p.confirmaciones -= 1;
+        emit ConfirmacionRevocada(id, msg.sender);
     }
 
     function ejecutar(uint256 id) external override soloFirmante existe(id) {
@@ -96,6 +102,10 @@ contract MultifirmaUBO is IMultifirmaUBO {
         if (p.confirmaciones < _umbral) {
             revert ConfirmacionesInsuficientes(id, p.confirmaciones, _umbral);
         }
+
+        // Una llamada a una dirección sin contrato devuelve éxito sin hacer nada:
+        // se rechaza antes de marcar la propuesta.
+        if (p.destino.code.length == 0) revert DestinoSinCodigo(p.destino);
 
         // Marcar como ejecutada ANTES de la llamada externa (patrón CEI).
         // Sirve contra la REENTRADA: si el destino vuelve a llamar a ejecutar(id)
@@ -109,7 +119,7 @@ contract MultifirmaUBO is IMultifirmaUBO {
         (bool ok, ) = p.destino.call(p.datos);
         if (!ok) revert LlamadaFallida(id);
 
-        // TODO: emitir el evento Ejecucion (según la interfaz)
+        emit Ejecucion(id);
     }
 
     function esFirmante(address cuenta) external view override returns (bool) {

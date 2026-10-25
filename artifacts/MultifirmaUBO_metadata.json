@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.34+commit.80d5c536"
 	},
 	"language": "Solidity",
 	"output": {
@@ -45,6 +45,17 @@
 					}
 				],
 				"name": "ConfirmacionesInsuficientes",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "destino",
+						"type": "address"
+					}
+				],
+				"name": "DestinoSinCodigo",
 				"type": "error"
 			},
 			{
@@ -373,7 +384,7 @@
 		"compilationTarget": {
 			"contracts/moduloA/MultifirmaUBO.sol": "MultifirmaUBO"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "osaka",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -394,11 +405,11 @@
 			]
 		},
 		"contracts/moduloA/MultifirmaUBO.sol": {
-			"keccak256": "0x108c7d57bf9422893f9da047173983d7b83643dd4c6ae291657f473a14a8f148",
+			"keccak256": "0xbd17699327d6316b3f53b8089dab50ff86691943b613f2b9f28c56905dea75c3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9e2c6726fa3161e2285f91658061fff8865de5d0c58a65ce6e720cd706f68a5b",
-				"dweb:/ipfs/QmfYQVCEj8CZi1YkThL3wwJnFy2B6CfW1e8ALTfgUPnLnP"
+				"bzz-raw://1d4e68386f2158eb8c92873db7cab2cc981e1a9e8c45b2fad2513b4ecdc96369",
+				"dweb:/ipfs/QmPyQxLdXZ498KY76fPdaAjDzfadFJ9FVHKvScoZQTXwK5"
 			]
 		}
 	},

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.34+commit.80d5c536"
 	},
 	"language": "Solidity",
 	"output": {
@@ -76,13 +76,13 @@
 					"details": "Remix ejecuta beforeEach() antes de CADA prueba: estado limpio."
 				}
 			},
-			"title": "Pruebas del Módulo A — PLANTILLA (Curso A)",
+			"title": "Pruebas del Módulo A (Curso A)",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "Ejecutar desde el complemento «Solidity Unit Testing» de Remix.         Mínimo 8 pruebas. Dos están resueltas como ejemplo; completar el resto.",
+			"notice": "Ejecutar desde el complemento «Solidity Unit Testing» de Remix.",
 			"version": 1
 		}
 	},
@@ -90,7 +90,7 @@
 		"compilationTarget": {
 			"tests/ModuloA_test.sol": "ModuloATest"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "osaka",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -135,19 +135,19 @@
 			]
 		},
 		"contracts/moduloA/MultifirmaUBO.sol": {
-			"keccak256": "0xf0a648f72184c3254abcf434a7b979e71e3b6585a0f6a1ca45733625111a378d",
+			"keccak256": "0xbd17699327d6316b3f53b8089dab50ff86691943b613f2b9f28c56905dea75c3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2eab71fb5e1191185ef645ddb2276a206670932da15a897d532e13fb2a0eaf9c",
-				"dweb:/ipfs/QmSzVHjpbXCGvPFRvuGsERgkCDGJNMJwWcUb9pFNTAiaAt"
+				"bzz-raw://1d4e68386f2158eb8c92873db7cab2cc981e1a9e8c45b2fad2513b4ecdc96369",
+				"dweb:/ipfs/QmPyQxLdXZ498KY76fPdaAjDzfadFJ9FVHKvScoZQTXwK5"
 			]
 		},
 		"contracts/moduloA/RegistroEmisores.sol": {
-			"keccak256": "0xba12efce4b188d9be9f2ef5282a1eeab24d792f8f5eb7c3c91bfb7e849be59f9",
+			"keccak256": "0xb2698ebfbc3a2c3a828f0bb55863829264c522170b0e17199036546f2a7e121e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a78ddcec8b8a9f4474aea0b4c920a6646ba4b78f0b5bff598786582c8d5231a4",
-				"dweb:/ipfs/Qmbt6xJdtf7Q1A6FiwiRzu3UwRHJGsTSkd6FKvgcvEvQoY"
+				"bzz-raw://1718ff119a1f654bfb3c6f56356bb5cf3ec38a41646e60dcde59b3637d0a7889",
+				"dweb:/ipfs/Qmck1KadiTD66g95dtG3VayWdDbWZk3EGt2NrPDoR7FfcD"
 			]
 		},
 		"remix_tests.sol": {
@@ -159,11 +159,11 @@
 			]
 		},
 		"tests/ModuloA_test.sol": {
-			"keccak256": "0xfaab4c65ce5b88d95ec76da1d5dcd59250092965f69fc31419ac2d751ed4a10c",
+			"keccak256": "0x0ef32978555feda3b6e8d1f368e985db53c8684fb78288e40de0927dec93a104",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d412ea68a6d9124948506e3f53e67f1619a78ece871e8a9ed920d8b388601233",
-				"dweb:/ipfs/QmZT8JjJS5VKzPRqXLWzSp6Vo5iASHjTfPy4ibocjcMq2S"
+				"bzz-raw://b09846832f4930e2459586eaecf72b18a18e0e424a078b05a779eeb5265850d6",
+				"dweb:/ipfs/QmQLpxJSeetHzU2ZzHK6KvwSxccrixQZf8Ki5TdqZk61EH"
 			]
 		}
 	},

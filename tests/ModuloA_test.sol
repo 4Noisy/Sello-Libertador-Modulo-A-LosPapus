@@ -8,9 +8,8 @@ import "../contracts/moduloA/RegistroEmisores.sol";
 import "../contracts/comun/ActorPruebas.sol";
 import "../contracts/comun/ConstantesUBO.sol";
 
-/// @title Pruebas del Módulo A — PLANTILLA (Curso A)
+/// @title Pruebas del Módulo A (Curso A)
 /// @notice Ejecutar desde el complemento «Solidity Unit Testing» de Remix.
-///         Mínimo 8 pruebas. Dos están resueltas como ejemplo; completar el resto.
 contract ModuloATest {
     MultifirmaUBO multifirma;
     RegistroEmisores registro;
@@ -52,6 +51,15 @@ contract ModuloATest {
         quien.llamar(address(multifirma), abi.encodeCall(IMultifirmaUBO.ejecutar, (id)));
     }
 
+    /// @dev Propone, confirma con 2 firmantes y ejecuta una llamada al registro.
+    function _aprobar(bytes memory datosRegistro) internal returns (uint256 id) {
+        id = _proponer(rector, datosRegistro);
+        _confirmar(rector, id);
+        _confirmar(secGeneral, id);
+        _ejecutar(vicerrector, id);
+    }
+
+    // ---------- EJEMPLO 1 (resuelto) ----------
     function autorizacionConDosFirmas() public {
         uint256 id = _proponer(rector,
             abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING)));
@@ -62,6 +70,7 @@ contract ModuloATest {
         Assert.ok(!registro.estaAutorizado(emisorIng, ConstantesUBO.SAL), "Solo en su facultad");
     }
 
+    // ---------- EJEMPLO 2 (resuelto): comprobar una reversión ----------
     function umbralNoAlcanzadoRevierte() public {
         uint256 id = _proponer(rector,
             abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING)));
@@ -73,45 +82,94 @@ contract ModuloATest {
         }
     }
 
+    // ---------- PRUEBAS OBLIGATORIAS ----------
     function dobleConfirmacionRevierte() public {
-        // TODO: un mismo firmante confirma dos veces -> debe revertir
-        Assert.ok(false, "TODO");
+        uint256 id = _proponer(rector,
+            abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING)));
+        _confirmar(rector, id);
+        try rector.llamar(address(multifirma), abi.encodeCall(IMultifirmaUBO.confirmar, (id))) {
+            Assert.ok(false, "Un firmante no debe confirmar dos veces");
+        } catch {
+            Assert.ok(true, "Revierte como se espera");
+        }
+        Assert.equal(multifirma.numeroConfirmaciones(id), uint256(1), "Debe seguir con 1 confirmacion");
     }
 
     function ejecucionRepetidaRevierte() public {
-        // TODO: ejecutar dos veces la misma propuesta -> la segunda revierte
-        Assert.ok(false, "TODO");
+        uint256 id = _aprobar(
+            abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING)));
+        try vicerrector.llamar(address(multifirma), abi.encodeCall(IMultifirmaUBO.ejecutar, (id))) {
+            Assert.ok(false, "Una propuesta no debe ejecutarse dos veces");
+        } catch {
+            Assert.ok(true, "Revierte como se espera");
+        }
     }
 
     function noFirmanteNoPuedeProponer() public {
-        // TODO: `intruso` intenta proponer -> revierte
-        Assert.ok(false, "TODO");
+        bytes memory datos =
+            abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING));
+        try intruso.llamar(
+            address(multifirma),
+            abi.encodeCall(IMultifirmaUBO.proponer, (address(registro), datos))
+        ) {
+            Assert.ok(false, "Un no firmante no debe poder proponer");
+        } catch {
+            Assert.ok(true, "Revierte como se espera");
+        }
     }
 
     function registroSoloAceptaMultifirma() public {
-        // TODO: llamar a registro.autorizarEmisor directamente (sin multifirma) -> revierte
-        Assert.ok(false, "TODO");
+        // Llama al registro directamente: msg.sender es este contrato de pruebas,
+        // no la multifirma.
+        try registro.autorizarEmisor(emisorIng, ConstantesUBO.ING) {
+            Assert.ok(false, "El registro solo debe aceptar a la multifirma");
+        } catch {
+            Assert.ok(true, "Revierte como se espera");
+        }
+        Assert.ok(!registro.estaAutorizado(emisorIng, ConstantesUBO.ING), "No debe quedar autorizado");
     }
 
     function revocacionYReautorizacion() public {
-        // TODO: autorizar, revocar y volver a autorizar; comprobar estaAutorizado en cada paso
-        //       y que periodos() devuelve 2 periodos
-        Assert.ok(false, "TODO");
+        bytes memory autorizar =
+            abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING));
+        bytes memory revocar =
+            abi.encodeCall(IRegistroEmisores.revocarEmisor, (emisorIng, ConstantesUBO.ING));
+
+        _aprobar(autorizar);
+        Assert.ok(registro.estaAutorizado(emisorIng, ConstantesUBO.ING), "Autorizado tras autorizar");
+
+        _aprobar(revocar);
+        Assert.ok(!registro.estaAutorizado(emisorIng, ConstantesUBO.ING), "No autorizado tras revocar");
+
+        _aprobar(autorizar);
+        Assert.ok(registro.estaAutorizado(emisorIng, ConstantesUBO.ING), "Autorizado de nuevo");
+
+        Assert.equal(
+            registro.periodos(emisorIng, ConstantesUBO.ING).length,
+            uint256(2),
+            "Debe haber 2 periodos"
+        );
     }
 
     function consultaHistoricaEstabaAutorizado() public {
-        // TODO: comprobar los BORDES de estabaAutorizado().
-        // ATENCIÓN: en Remix, cada función de prueba se ejecuta en UNA sola transacción,
-        //   así que block.timestamp no cambia dentro de la prueba y no se puede «viajar en
-        //   el tiempo». Con t = block.timestamp, comprobar al menos:
-        //     - autorizar en t:            estabaAutorizado(t - 1) == false
-        //                                  estabaAutorizado(t)     == true
-        //                                  estabaAutorizado(t + 1000) == true (periodo abierto)
-        //     - revocar en el mismo t:     el periodo queda [t, t), vacío -> estabaAutorizado(t) == false
-        //     - reautorizar en t:          estabaAutorizado(t) == true de nuevo
-        //   La comprobación con momentos DISTINTOS (antes, durante y después de un periodo
-        //   cerrado) se hace en el script escenario_moduloA.js, donde cada transacción es
-        //   un bloque nuevo con la hora real.
-        Assert.ok(false, "TODO");
+        uint256 t = block.timestamp;
+        bytes memory autorizar =
+            abi.encodeCall(IRegistroEmisores.autorizarEmisor, (emisorIng, ConstantesUBO.ING));
+        bytes memory revocar =
+            abi.encodeCall(IRegistroEmisores.revocarEmisor, (emisorIng, ConstantesUBO.ING));
+
+        // Autorizar en t: periodo abierto [t, 0)
+        _aprobar(autorizar);
+        Assert.ok(!registro.estabaAutorizado(emisorIng, ConstantesUBO.ING, t - 1), "Antes de t: no");
+        Assert.ok(registro.estabaAutorizado(emisorIng, ConstantesUBO.ING, t), "En t: si");
+        Assert.ok(registro.estabaAutorizado(emisorIng, ConstantesUBO.ING, t + 1000), "Periodo abierto: si");
+
+        // Revocar en el mismo t: el periodo queda [t, t), vacio
+        _aprobar(revocar);
+        Assert.ok(!registro.estabaAutorizado(emisorIng, ConstantesUBO.ING, t), "Periodo vacio: no");
+
+        // Reautorizar en t: nuevo periodo abierto
+        _aprobar(autorizar);
+        Assert.ok(registro.estabaAutorizado(emisorIng, ConstantesUBO.ING, t), "Reautorizado: si");
     }
 }
